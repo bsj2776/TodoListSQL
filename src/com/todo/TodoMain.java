@@ -72,6 +72,19 @@ public class TodoMain {
 				String cate = sc.nextLine().trim();
 				TodoUtil.findCateList(l, cate);
 				break;
+				
+			case "comp":
+				int id_num = sc.nextInt();
+				TodoUtil.completeItem(l, id_num);
+				break;
+				
+			case "ls_comp":
+				TodoUtil.listAll(l, 1);
+				break;
+				
+			case "comp_del":
+				TodoUtil.completeDel(l, 1);
+				break;
 
 			case "exit":
 				quit = true;

@@ -37,7 +37,7 @@ public class TodoUtil {
 		System.out.print("[마감일자를 입력하세요] > ");
 		due_date = sc.nextLine().trim();
 		
-		TodoItem t = new TodoItem(title, desc, category, due_date);
+		TodoItem t = new TodoItem(title, desc, category, due_date, 0);
 		if(l.addItem(t) > 0)
 			System.out.println("추가되었습니다!");
 	}
@@ -53,11 +53,18 @@ public class TodoUtil {
 		if(l.deleteItem(index) > 0)
 			System.out.println("삭제되었습니다!");
 	}
+	
+	public static void completeDel(TodoList l,int comp_num) {
+		if(l.completeDel(comp_num) > 0) {
+			System.out.println("완료 체크 하였습니다!");
+		}
+	}
 
 
 	public static void updateItem(TodoList l) {
 		
 		String new_title, new_desc, new_category, new_due_date;
+		int new_is_completed;
 		Scanner sc = new Scanner(System.in);
 		
 		System.out.print("\n"
@@ -75,8 +82,10 @@ public class TodoUtil {
 		new_desc = sc.nextLine().trim();
 		System.out.print("[새 마감일자를 입력하세요] > ");
 		new_due_date = sc.nextLine().trim();
+		System.out.print("[완료여부를 입력하세요(완료 = 1, 미완료 = 0)] > ");
+		new_is_completed = sc.nextInt();
 		
-		TodoItem t = new TodoItem(new_title, new_desc, new_category, new_due_date);
+		TodoItem t = new TodoItem(new_title, new_desc, new_category, new_due_date, new_is_completed);
 		t.setId(index);
 		if(l.updateItem(t) > 0)
 			System.out.println("수정되었습니다!");
@@ -92,6 +101,13 @@ public class TodoUtil {
 	public static void listAll(TodoList l, String orderby, int ordering) {
 		System.out.printf("[전체 목록, 총 %d개]\n", l.getCount());
 		for(TodoItem item : l.getOrderedList(orderby, ordering)) {
+			System.out.println(item.toString());
+		}
+	}
+	//ls_comp 구현
+	public static void listAll(TodoList l, int num) {
+		System.out.printf("총 %d개의 항목이 완료되었습니다.\n", l.getCount(num));
+		for(TodoItem item : l.getList(num)) {
 			System.out.println(item.toString());
 		}
 	}
@@ -121,6 +137,13 @@ public class TodoUtil {
 			count++;
 		}
 		System.out.printf("\n총 %d개의 항목을 찾았습니다.\n", count);
+	}
+	//comp구현
+	public static void completeItem(TodoList l ,int id_num) {
+		int index = id_num;
+		if(l.completedItem(index) > 0) {
+			System.out.println("완료 체크 하였습니다!");
+		}
 	}
 	//데이터파일(todolist.txt)저장/읽기 기능 - 프로그램 시작 시 읽기 & 종료 시 저장
 	/*public static void saveList(TodoList l, String filename) {

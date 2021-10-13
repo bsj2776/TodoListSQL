@@ -15,6 +15,9 @@ public class Menu {
         System.out.println("[find <key>] : 키워드찾기");
         System.out.println("[ls_cate] : 카테고리 확인");
         System.out.println("[find_cate <key>] : 카테고리찾기");
+        System.out.println("[comp <id>] : 항목 완료하기");
+        System.out.println("[ls_comp] : 완료된 항목 출력하기");
+        System.out.println("[comp_del] : 완료된 항목 삭제");
         System.out.println("[exit] : 프로그램 종료");
     }
     

@@ -10,10 +10,11 @@ public class TodoItem {
     private String current_date;
     private String category;
     private String due_date;
+    private int is_completed;
     
     
     
-    public TodoItem(String title, String desc, String category, String due_date){
+    public TodoItem(String title, String desc, String category, String due_date, int is_completed){
     	//addList 持失切
     	this.title = title;
     	this.desc = desc;
@@ -21,15 +22,16 @@ public class TodoItem {
         this.due_date = due_date;
         SimpleDateFormat c = new SimpleDateFormat("yyyy/MM/dd kk:mm:ss");
         this.current_date = c.format(new Date());
+        this.is_completed = is_completed;
     }
     
-    public TodoItem(String category, String title, String desc, String due_date, String current_date){
-        //loadList 持失切
-    	this.category = category;
+    public TodoItem(String title, String desc, String category, String due_date, String current_date, int is_completed){
     	this.title = title;
-        this.desc = desc;
+    	this.desc = desc;
+    	this.category = category;
         this.due_date = due_date;
         this.current_date = current_date;
+        this.is_completed = is_completed;
     }
 
 	public int getId() {
@@ -80,10 +82,22 @@ public class TodoItem {
 		this.due_date = due_date;
 	}
 
+	public int getIs_completed() {
+		return is_completed;
+	}
+
+	public void setIs_completed(int is_completed) {
+		this.is_completed = is_completed;
+	}
+
 	@Override
 	public String toString() {
-		return id + " " + "[" + category + "] " + title + " - " + desc + " - " + due_date + 
-				" - " + current_date;
+		if(is_completed == 1) {
+			return id + " " + "[" + category + "] " + title +  " [V] " + " - " 
+					+ desc + " - " + due_date + " - " + current_date;
+		}else
+			return id + " " + "[" + category + "] " + title  + " - " + desc + " - " 
+					+ due_date + " - " + current_date;
 	}
 
 	/*public String toSaveString() {
