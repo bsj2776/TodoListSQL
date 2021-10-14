@@ -11,10 +11,13 @@ public class TodoItem {
     private String category;
     private String due_date;
     private int is_completed;
+    private String meet_place;
+    private String priority;
     
     
     
-    public TodoItem(String title, String desc, String category, String due_date, int is_completed){
+    public TodoItem(String title, String desc, String category, String due_date, int is_completed
+    		, String meet_place, String priority){
     	//addList »ý¼ºÀÚ
     	this.title = title;
     	this.desc = desc;
@@ -23,15 +26,20 @@ public class TodoItem {
         SimpleDateFormat c = new SimpleDateFormat("yyyy/MM/dd kk:mm:ss");
         this.current_date = c.format(new Date());
         this.is_completed = is_completed;
+        this.meet_place = meet_place;
+        this.priority = priority;
     }
     
-    public TodoItem(String title, String desc, String category, String due_date, String current_date, int is_completed){
+    public TodoItem(String title, String desc, String category, String due_date, String current_date, int is_completed
+    		, String meet_place, String priority){
     	this.title = title;
     	this.desc = desc;
     	this.category = category;
         this.due_date = due_date;
         this.current_date = current_date;
         this.is_completed = is_completed;
+        this.meet_place = meet_place;
+        this.priority = priority;
     }
 
 	public int getId() {
@@ -89,15 +97,31 @@ public class TodoItem {
 	public void setIs_completed(int is_completed) {
 		this.is_completed = is_completed;
 	}
+	
+	public String getMeet_place() {
+		return meet_place;
+	}
+
+	public void setMeet_place(String meet_place) {
+		this.meet_place = meet_place;
+	}
+	
+	public String getPriority() {
+		return priority;
+	}
+
+	public void setPriority(String priority) {
+		this.priority = priority;
+	}
 
 	@Override
 	public String toString() {
 		if(is_completed == 1) {
-			return id + " " + "[" + category + "] " + title +  " [V] " + " - " 
-					+ desc + " - " + due_date + " - " + current_date;
+			return id + " " + "[" + category + "] " + title +  " [V] " + " - " + desc + " - " 
+					+ meet_place + " - " + priority + " - " + due_date + " - " + current_date;
 		}else
 			return id + " " + "[" + category + "] " + title  + " - " + desc + " - " 
-					+ due_date + " - " + current_date;
+					+ meet_place + " - " + priority + " - " + due_date + " - " + current_date;
 	}
 
 	/*public String toSaveString() {

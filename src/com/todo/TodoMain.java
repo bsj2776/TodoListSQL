@@ -82,8 +82,38 @@ public class TodoMain {
 				TodoUtil.listAll(l, 1);
 				break;
 				
-			case "comp_del":
+			case "comp_edit":
+				TodoUtil.completeEdit(l, 0);
+				break;
+				
+			case "comp_delAll":
 				TodoUtil.completeDel(l, 1);
+				break;
+				
+			case "find_meet":
+				String place = sc.nextLine().trim();
+				TodoUtil.findPlaceList(l, place);
+				break;
+				
+			case "meet_edit":
+				TodoUtil.meetPlaceEdit(l);
+				break;
+				
+			case "meet_del":
+				TodoUtil.meetPlaceDel(l);
+				break;
+				
+			case "pri_edit":
+				TodoUtil.priorityEdit(l);
+				break;
+				
+			case "pri_del":
+				TodoUtil.priorityDel(l);
+				break;
+				
+			case "pri_ls":
+				String priority = sc.nextLine().trim();
+				TodoUtil.findPriorityList(l, priority);
 				break;
 
 			case "exit":

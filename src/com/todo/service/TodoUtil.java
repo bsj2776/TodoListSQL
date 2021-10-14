@@ -15,7 +15,7 @@ public class TodoUtil {
 	
 	public static void createItem(TodoList l) {
 		
-		String title, desc, category, due_date;
+		String title, desc, category, due_date, meet_place, priority;
 		Scanner sc = new Scanner(System.in);
 		
 		System.out.print("\n"
@@ -37,7 +37,13 @@ public class TodoUtil {
 		System.out.print("[마감일자를 입력하세요] > ");
 		due_date = sc.nextLine().trim();
 		
-		TodoItem t = new TodoItem(title, desc, category, due_date, 0);
+		System.out.print("[약속장소를 입력하세요] > ");
+		meet_place = sc.nextLine().trim();
+		
+		System.out.print("[일정의 중요도를 입력하세요 (상, 중, 하)] > ");
+		priority = sc.nextLine().trim();
+		
+		TodoItem t = new TodoItem(title, desc, category, due_date, 0, meet_place, priority);
 		if(l.addItem(t) > 0)
 			System.out.println("추가되었습니다!");
 	}
@@ -63,7 +69,7 @@ public class TodoUtil {
 
 	public static void updateItem(TodoList l) {
 		
-		String new_title, new_desc, new_category, new_due_date;
+		String new_title, new_desc, new_category, new_due_date, new_meet_place, new_priority;
 		int new_is_completed;
 		Scanner sc = new Scanner(System.in);
 		
@@ -84,8 +90,14 @@ public class TodoUtil {
 		new_due_date = sc.nextLine().trim();
 		System.out.print("[완료여부를 입력하세요(완료 = 1, 미완료 = 0)] > ");
 		new_is_completed = sc.nextInt();
+		sc.nextLine();
+		System.out.print("[새 약속장소를 입력하세요] > ");
+		new_meet_place = sc.nextLine();
+		System.out.print("[중요도를 입력하세요] > ");
+		new_priority = sc.nextLine();
 		
-		TodoItem t = new TodoItem(new_title, new_desc, new_category, new_due_date, new_is_completed);
+		TodoItem t = new TodoItem(new_title, new_desc, new_category, new_due_date, new_is_completed
+				, new_meet_place, new_priority);
 		t.setId(index);
 		if(l.updateItem(t) > 0)
 			System.out.println("수정되었습니다!");
@@ -138,12 +150,100 @@ public class TodoUtil {
 		}
 		System.out.printf("\n총 %d개의 항목을 찾았습니다.\n", count);
 	}
+	
+	public static void findPlaceList(TodoList l, String place) {
+		int count = 0;
+		for(TodoItem item : l.getListMeetPlace(place)) {
+			System.out.println(item.toString());
+			count++;
+		}
+		System.out.printf("\n총 %d개의 항목을 찾았습니다.\n", count);
+	}
 	//comp구현
 	public static void completeItem(TodoList l ,int id_num) {
 		int index = id_num;
 		if(l.completedItem(index) > 0) {
 			System.out.println("완료 체크 하였습니다!");
 		}
+	}
+	
+	public static void completeEdit(TodoList l, int num) {
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.print("\n"
+				+ "[완료항목 수정]\n"
+				+ "[수정하고 싶은 항목의 번호을 입력하세요] > ");
+		int index = sc.nextInt();
+
+		if(l.completeEdit(index) > 0)
+			System.out.println("수정되었습니다!");
+	}
+	
+	public static void meetPlaceEdit(TodoList l) {
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.print("\n"
+				+ "[약속장소 수정]\n"
+				+ "[수정하고 싶은 항목의 번호을 입력하세요] > ");
+		int index = sc.nextInt();
+		sc.nextLine();
+		
+		System.out.print("[새로운 약속장소를 입력하세요] > ");
+		String new_place = sc.nextLine().trim();
+
+		if(l.meetPlaceEdit(index, new_place) > 0)
+			System.out.println("수정되었습니다!");
+	}
+	
+	public static void meetPlaceDel(TodoList l) {
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.print("\n"
+				+ "[약속장소 삭제]\n"
+				+ "[삭제하고 싶은 항목의 번호을 입력하세요] > ");
+		
+		int index = sc.nextInt();
+		
+		if(l.meetPlaceDel(index) > 0)
+			System.out.println("삭제되었습니다!");
+	}
+	
+	public static void priorityEdit(TodoList l) {
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.print("\n"
+				+ "[중요도 수정]\n"
+				+ "[수정하고 싶은 항목의 번호을 입력하세요] > ");
+		int index = sc.nextInt();
+		sc.nextLine();
+		
+		System.out.print("[새로운 중요도를 입력하세요 (상, 중, 하)] > ");
+		String new_priority = sc.nextLine().trim();
+
+		if(l.priorityEdit(index, new_priority) > 0)
+			System.out.println("수정되었습니다!");
+	}
+	
+	public static void priorityDel(TodoList l) {
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.print("\n"
+				+ "[중요도 삭제]\n"
+				+ "[삭제하고 싶은 항목의 번호을 입력하세요] > ");
+		
+		int index = sc.nextInt();
+		
+		if(l.priorityDel(index) > 0)
+			System.out.println("삭제되었습니다!");
+	}
+	
+	public static void findPriorityList(TodoList l, String pri) {
+		int count = 0;
+		for(TodoItem item : l.getListPriority(pri)) {
+			System.out.println(item.toString());
+			count++;
+		}
+		System.out.printf("\n총 %d개의 항목을 찾았습니다.\n", count);
 	}
 	//데이터파일(todolist.txt)저장/읽기 기능 - 프로그램 시작 시 읽기 & 종료 시 저장
 	/*public static void saveList(TodoList l, String filename) {
