@@ -49,7 +49,6 @@ public class TodoUtil {
 	}
 
 	public static void deleteItem(TodoList l) {
-		
 		Scanner sc = new Scanner(System.in);
 		
 		System.out.print("\n[항목 삭제]\n");
@@ -58,11 +57,34 @@ public class TodoUtil {
 		int index = sc.nextInt();
 		if(l.deleteItem(index) > 0)
 			System.out.println("삭제되었습니다!");
+		else
+			System.out.println("Error: 그 항목은 존재하지 않습니다.");
+	}
+	
+	public static void multiDelete(TodoList l, int count) {
+		int result = 1;
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.print("\n[항목 동시 삭제]\n");
+		System.out.print("[삭제하고 싶은 항목의 번호들을 입력하세요] > ");
+		
+		for(int i = 0; i < count; i++) {
+			int index_i = sc.nextInt();
+			if(l.deleteItem(index_i) < 0) {
+				result = 0;
+				break;
+			}else
+				continue;
+		}
+		if(result == 1) {
+			System.out.println("삭제완료 하였습니다");
+		}else
+			System.out.println("Error: 존재하지 않는 항목이 포함되어있습니다.");
 	}
 	
 	public static void completeDel(TodoList l,int comp_num) {
 		if(l.completeDel(comp_num) > 0) {
-			System.out.println("완료 체크 하였습니다!");
+			System.out.println("완료체크된 항목을 모두 삭제하였습니다!");
 		}
 	}
 
@@ -164,7 +186,29 @@ public class TodoUtil {
 		int index = id_num;
 		if(l.completedItem(index) > 0) {
 			System.out.println("완료 체크 하였습니다!");
+		}else
+			System.out.println("Error: 존재하지 않는 항목이 포함되어 있습니다");
+	}
+	
+	public static void multiComp(TodoList l, int count) {
+		int result = 1;
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.print("\n[동시 완료 체크]\n");
+		System.out.print("[완료 체크하고 싶은 항목의 번호들을 입력하세요] > ");
+		
+		for(int i = 0; i < count; i++) {
+			int index_i = sc.nextInt();
+			if(l.completedItem(index_i) < 0) {
+				result = 0;
+				break;
+			}else
+				continue;
 		}
+		if(result == 1) {
+			System.out.println("완료체크 하였습니다");
+		}else
+			System.out.println("Error: 존재하지 않는 항목이 포함되어있습니다.");
 	}
 	
 	public static void completeEdit(TodoList l, int num) {

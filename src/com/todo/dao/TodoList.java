@@ -56,6 +56,9 @@ public class TodoList {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1,index);
 			count = pstmt.executeUpdate();
+			if(count == 0) {
+				return -1;
+			}
 			pstmt.close();
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -110,6 +113,9 @@ public class TodoList {
 			pstmt.setInt(1, 1);
 			pstmt.setInt(2, num);
 			count = pstmt.executeUpdate();
+			if(count == 0) {
+				return -1;
+			}
 			pstmt.close();
 		}catch(SQLException e) {
 			e.printStackTrace();

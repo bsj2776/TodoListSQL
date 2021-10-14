@@ -24,7 +24,9 @@ public class Menu {
         System.out.println("[meet_del] : 약속장소 삭제");
         System.out.println("[pri_edit] : 중요도 수정");
         System.out.println("[pri_del] : 중요도 삭제");
-        System.out.println("pri_ls <key>] : 선택한 중요도 항목 출력");
+        System.out.println("[pri_ls <key>] : 선택한 중요도 항목 출력");
+        System.out.println("[multi_del <num>] : 항목 동시 삭제");
+        System.out.println("[multi_comp <num>] : 동시 완료 체크");
         System.out.println("[exit] : 프로그램 종료");
     }
     

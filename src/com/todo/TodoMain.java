@@ -115,6 +115,16 @@ public class TodoMain {
 				String priority = sc.nextLine().trim();
 				TodoUtil.findPriorityList(l, priority);
 				break;
+				
+			case "multi_del":
+				int count_del = sc.nextInt();
+				TodoUtil.multiDelete(l, count_del);
+				break;
+				
+			case "multi_comp":
+				int count_comp = sc.nextInt();
+				TodoUtil.multiComp(l, count_comp);
+				break;
 
 			case "exit":
 				quit = true;
