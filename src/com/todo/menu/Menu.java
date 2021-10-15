@@ -6,6 +6,7 @@ public class Menu {
     	System.out.println("<TodolistApp의 사용법>");
         System.out.println("[add] : 항목 추가");
         System.out.println("[del] : 항목 삭제");
+        System.out.println("[del_key <key>] : 키워드항목 삭제");
         System.out.println("[edit] : 항목 전체 수정");
         System.out.println("[ls] : 전체 목록");
         System.out.println("[ls_name] : 제목 순으로 정렬");
@@ -25,6 +26,7 @@ public class Menu {
         System.out.println("[pri_edit] : 중요도 수정");
         System.out.println("[pri_del] : 중요도 삭제");
         System.out.println("[pri_ls <key>] : 선택한 중요도 항목 출력");
+        System.out.println("[pri_sort] : 중요도 순서로 출력");
         System.out.println("[multi_del <num>] : 항목 동시 삭제");
         System.out.println("[multi_comp <num>] : 동시 완료 체크");
         System.out.println("[exit] : 프로그램 종료");

@@ -31,6 +31,11 @@ public class TodoMain {
 				TodoUtil.deleteItem(l);
 				break;
 				
+			case "del_key":
+				String key = sc.nextLine().trim();
+				TodoUtil.deleteItem(l, key);
+				break;
+				
 			case "edit":
 				TodoUtil.updateItem(l);
 				break;
@@ -114,6 +119,11 @@ public class TodoMain {
 			case "pri_ls":
 				String priority = sc.nextLine().trim();
 				TodoUtil.findPriorityList(l, priority);
+				break;
+				
+			case "pri_sort":
+				System.out.println("[중요도순 정렬 리스트]");
+				TodoUtil.listAll(l, "priority", 1);
 				break;
 				
 			case "multi_del":

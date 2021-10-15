@@ -61,6 +61,28 @@ public class TodoUtil {
 			System.out.println("Error: 그 항목은 존재하지 않습니다.");
 	}
 	
+	public static void deleteItem(TodoList l, String keyword) {
+		Scanner sc = new Scanner(System.in);
+		
+		for(TodoItem item : l.getList(keyword)) {
+			System.out.println(item.toString());
+		}
+		
+		System.out.print("[삭제하고 싶은 항목의 번호를 입력하세요] > ");
+		int index = sc.nextInt();
+		sc.nextLine();
+		
+		System.out.print("[정말 삭제하시겠습니까? (y/n)] > ");
+		String check = sc.next();
+		
+		if(check.equals("y")) {
+			if(l.deleteItem(index) > 0)
+				System.out.println("삭제되었습니다!");
+		}
+		else if(check.equals("n"))
+			System.out.println("[취소하였습니다!]");
+	}
+	
 	public static void multiDelete(TodoList l, int count) {
 		int result = 1;
 		Scanner sc = new Scanner(System.in);
@@ -138,6 +160,7 @@ public class TodoUtil {
 			System.out.println(item.toString());
 		}
 	}
+	
 	//ls_comp 구현
 	public static void listAll(TodoList l, int num) {
 		System.out.printf("총 %d개의 항목이 완료되었습니다.\n", l.getCount(num));
